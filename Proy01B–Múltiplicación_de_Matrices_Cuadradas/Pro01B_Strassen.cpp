@@ -10,7 +10,7 @@
 
 using namespace std;
 
-
+//Function to fill a matrix
 void fillMatrix(vector<vector<int>> &vV){
 
     for(int iC = 0; iC < vV.size(); iC++){
@@ -20,6 +20,7 @@ void fillMatrix(vector<vector<int>> &vV){
     }
 }
 
+//Function to print a Matrix
 void printMatrix(vector<vector<int>> vV){
 
     for(int iC = 0; iC < vV.size(); iC++){
@@ -30,17 +31,22 @@ void printMatrix(vector<vector<int>> vV){
     }
 }
 
+//Function that realize the traditional Multplication of Matrix's
 vector<vector<int>> traditionalMultiplication(int iN, vector<vector<int>> vA, vector<vector<int>> vB){
-    vector<vector<int>> vTemp(iN, vector<int>(iN));
+    vector<vector<int>> vTemp(iN, vector<int>(iN));             //Auxiliar Matrix
 
     for(int iI = 0; iI < iN; iI++){
         for(int iJ = 0; iJ < iN; iJ++){
             for(int iK = 0; iK < iN; iK++){
-                vTemp[iI][iJ] =
+                vTemp[iI][iJ] += vA[iI][iK] * vB[iK][iJ];       //Multipliy the values and add to the actual position
             }
         }
     }
+
+    return vTemp;
 }
+
+
 
 int main(){
     int iN;
@@ -54,7 +60,7 @@ int main(){
     fillMatrix(vB);
 
     cout << "Traditional:" << endl;
-    printMatrix(vA);// traditionalMultiplication(vA, vB));
+    printMatrix(traditionalMultiplication(iN, vA, vB));
     cout << "Scalar Multiplications: " << pow(iN,3) << endl;
     cout << endl;
 
