@@ -11,6 +11,11 @@ using namespace std;
 int main(){
 
   int Cases; // number of cases
+  cin >> Cases;
+  while(Cases > 0){
+
+    Cases--;
+  }
 
   return 0;
 }
