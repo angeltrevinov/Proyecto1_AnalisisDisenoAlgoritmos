@@ -14,29 +14,35 @@ double getMedian(int iArr[],int iBottom,int iTop){
   return (iArr[iBottom + iLen/2] + iArr[iBottom+ iLen/2-1])/2;
 }
 
-double Median (int iArr1[], int iArr2[], int iN, int iBottom1, int iTop1, int iBottom2, int iTop2){
+double Median (int iArr1[], int iArr2[], int iN, int iBottom1, int iTop1,
+  int iBottom2, int iTop2){
 
       if(iTop1 == iBottom1){//  the top and bottom are in the same position
           return (iArr1[iBottom1] + iArr2[iBottom2])/2;
       }
 
       if(iTop1 - iBottom1 == 1){ // their length is just one, so calculate the median
-          return (double)(max(iArr1[iBottom1], iArr2[iBottom2]) + min(iArr1[iTop1], iArr2[iTop2]))/2;
+          return (double)(max(iArr1[iBottom1], iArr2[iBottom2]) + min(iArr1[iTop1],
+            iArr2[iTop2]))/2;
       }
 
       double iMid1 = getMedian(iArr1,iBottom1,iTop1); // get in the median for the first array
       double iMid2 = getMedian(iArr2,iBottom1,iTop2); // get the median for the second array
       if(iMid1 <= iMid2){ // you are too far from the left
           if((iTop1-iBottom1 + 1) % 2 == 0){
-              return Median(iArr1, iArr2, iN, (iTop1+iBottom1)/2, iTop1, iBottom2, (iTop2+iBottom2)/2 + 1);
+              return Median(iArr1, iArr2, iN, (iTop1+iBottom1)/2, iTop1, iBottom2,
+              (iTop2+iBottom2)/2 + 1);
           }else{
-              return Median(iArr1, iArr2, iN, (iTop1+iBottom1)/2, iTop1, iBottom2, (iTop2+iBottom2)/2);
+              return Median(iArr1, iArr2, iN, (iTop1+iBottom1)/2, iTop1, iBottom2,
+              (iTop2+iBottom2)/2);
           }
       }else{ // you are too far from the right
           if((iTop1-iBottom1 + 1) % 2 == 0){
-              return Median(iArr1, iArr2, iN, iBottom1, (iTop1+iBottom1)/2 + 1, iBottom2 = (iTop2+iBottom2)/2, iTop2);
+              return Median(iArr1, iArr2, iN, iBottom1, (iTop1+iBottom1)/2 + 1,
+              iBottom2 = (iTop2+iBottom2)/2, iTop2);
           }else{
-              return Median(iArr1, iArr2, iN, iBottom1, (iTop1+iBottom1)/2, iBottom2 = (iTop2+iBottom2)/2, iTop2);
+              return Median(iArr1, iArr2, iN, iBottom1, (iTop1+iBottom1)/2,
+              iBottom2 = (iTop2+iBottom2)/2, iTop2);
           }
       }
 }
@@ -62,7 +68,8 @@ int main(){
     }
 
     //sends both arrays with their sizes and bottoms and tops to start the recursive function
-    cout << "iMidian Case "<<iCont<<": "<< Median(iiArr1, iiArr2, iN, 0 , iN-1, 0, iN-1) << endl;
+    cout << "iMidian Case "<<iCont<<": "<< Median(iiArr1, iiArr2, iN, 0 ,
+      iN-1, 0, iN-1) << endl;
 
     iCont++;
   }
