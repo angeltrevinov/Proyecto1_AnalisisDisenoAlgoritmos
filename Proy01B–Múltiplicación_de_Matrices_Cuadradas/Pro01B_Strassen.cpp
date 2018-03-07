@@ -98,6 +98,10 @@ void strassenMethod(int iN, vector<vector<int>> vA,
         traditionalMethod(2, vA, vB, vC);
 
     }else{
+        //Auxiliar Matrices to store the results of the Add and Substract operations
+        vector<vector<int>> vAA(iN, vector<int>(iN));
+        vector<vector<int>> vBB(iN, vector<int>(iN));
+
         //The submatrices of the A and B Matrices
         vector<vector<int>> vA11(iN, vector<int>(iN));
         vector<vector<int>> vA12(iN, vector<int>(iN));
@@ -109,18 +113,11 @@ void strassenMethod(int iN, vector<vector<int>> vA,
         vector<vector<int>> vB21(iN, vector<int>(iN));
         vector<vector<int>> vB22(iN, vector<int>(iN));
 
-        fillSubMatrices(iN/2, vA11, vA12, vA21, vA22, vA, vB11, vB12, vB21,
-        vB22, vB);
-
         //The Submatrices of the Strassen Algorithm
         vector<vector<int>> vC11(iN, vector<int>(iN));
         vector<vector<int>> vC12(iN, vector<int>(iN));
         vector<vector<int>> vC21(iN, vector<int>(iN));
         vector<vector<int>> vC22(iN, vector<int>(iN));
-
-        //Auxiliar Matrices to store the results of the Add and Substract operations
-        vector<vector<int>> vAA(iN, vector<int>(iN));
-        vector<vector<int>> vBB(iN, vector<int>(iN));
 
         //The matrices that represent the M1 to M7
         vector<vector<int>> vM1(iN, vector<int>(iN));
@@ -131,68 +128,73 @@ void strassenMethod(int iN, vector<vector<int>> vA,
         vector<vector<int>> vM6(iN, vector<int>(iN));
         vector<vector<int>> vM7(iN, vector<int>(iN));
 
+        iN /= 2;
+        fillSubMatrices(iN, vA11, vA12, vA21, vA22, vA, vB11, vB12, vB21,
+                vB22, vB);
+
         /* | A11     A12 |   | B11     B12 |        | C11     C12 |
            |             | X |             |    =   |             |
            | A21     A22 |   | B21     B22 |        | C21     C22 |
         */
-        //CALCULATE FROM M1 TO M7 (USING THE ADD AND SUBTRACT METHODS)
+            //CALCULATE FROM M1 TO M7 (USING THE ADD AND SUBTRACT METHODS)
 
         //Calculate M1 = (a11 + a22) * (b11 + b22)
-        addMatrix(iN/2, vA11, vA22, vAA);
-        addMatrix(iN/2, vB11, vB22, vBB);
-        strassenMethod(iN/2, vAA, vBB, vM1);
+        addMatrix(iN, vA11, vA22, vAA);
+        addMatrix(iN, vB11, vB22, vBB);
+        strassenMethod(iN, vAA, vBB, vM1);
 
         //Calculate M2 = (a21 + a22) * b11
-        addMatrix(iN/2, vA21, vA22, vAA);
-        strassenMethod(iN/2, vAA, vB11, vM2);
+        addMatrix(iN, vA21, vA22, vAA);
+        strassenMethod(iN, vAA, vB11, vM2);
 
         //Calculate M3 = a11 * (b12 - b22)
-        substractMatrix(iN/2, vB12, vB22, vBB);
-        strassenMethod(iN/2, vA11, vBB, vM3);
+        substractMatrix(iN, vB12, vB22, vBB);
+        strassenMethod(iN, vA11, vBB, vM3);
 
         //Calculate M4 = a22 * (b21 - b11)
-        substractMatrix(iN/2, vB21, vB11, vBB);
-        strassenMethod(iN/2, vA22, vBB, vM4);
+        substractMatrix(iN, vB21, vB11, vBB);
+        strassenMethod(iN, vA22, vBB, vM4);
 
         //Calculate M5 = (a11 + a12) * b22
-        addMatrix(iN/2, vA11, vA12, vAA);
-        strassenMethod(iN/2, vAA, vB22, vM5);
+        addMatrix(iN, vA11, vA12, vAA);
+        strassenMethod(iN, vAA, vB22, vM5);
 
         //Calculate M6 = (a21 - a11) * (b11 + b12)
-        substractMatrix(iN/2, vA21, vA11, vAA);
-        addMatrix(iN/2, vB11, vB12, vBB);
-        strassenMethod(iN/2, vAA, vBB, vM6);
+        substractMatrix(iN, vA21, vA11, vAA);
+        addMatrix(iN, vB11, vB12, vBB);
+        strassenMethod(iN, vAA, vBB, vM6);
 
         //Calculate M7 = (a12 - a22) * (b21 + b22)
-        substractMatrix(iN/2, vA12, vA22, vAA);
-        addMatrix(iN/2, vB21, vB22, vBB);
-        strassenMethod(iN/2, vAA, vBB, vM7);
+        substractMatrix(iN, vA12, vA22, vAA);
+        addMatrix(iN, vB21, vB22, vBB);
+        strassenMethod(iN, vAA, vBB, vM7);
 
-        //CALCULATE FROM C11 TO C22
+                                    //CALCULATE FROM C11 TO C22
 
         //Calculate C11 = M1 + M4 - M5 + M7
-        addMatrix(iN/2, vM1, vM4, vAA);
-        substractMatrix(iN/2, vM7, vM5, vBB);
-        addMatrix(iN/2, vAA, vBB, vC11);
+        addMatrix(iN, vM1, vM4, vAA);
+        substractMatrix(iN, vM7, vM5, vBB);
+        addMatrix(iN, vAA, vBB, vC11);
 
         //Calculate C12 = M3 + M5
-        addMatrix(iN/2, vM3, vM5, vC12);
+        addMatrix(iN, vM3, vM5, vC12);
 
         //Calculate C21 = M2 + M4
-        addMatrix(iN/2, vM2, vM4, vC21);
+        addMatrix(iN, vM2, vM4, vC21);
 
         //Calculate C22 = M1 + M3 - M2 + M6
-        substractMatrix(iN/2, vM1, vM2, vAA);
-        addMatrix(iN/2, vM3, vM6, vBB);
-        addMatrix(iN/2, vAA, vBB, vC22);
+        substractMatrix(iN, vM1, vM2, vAA);
+        addMatrix(iN, vM3, vM6, vBB);
+        addMatrix(iN, vAA, vBB, vC22);
 
-        //Set the result to C[][N]
-        for(int iI = 0; iI < iN/2; iI++) {
-           for(int iJ = 0; iJ < iN/2; iJ++) {
+        //Fill the resultant Matrix of the multiplication
+        for(int iI = 0; iI < iN; iI++) {
+           for(int iJ = 0; iJ < iN; iJ++) {
+
               vC[iI][iJ] = vC11[iI][iJ];
-              vC[iI][iJ + iN/2] = vC12[iI][iJ];
-              vC[iI + iN/2][iJ] = vC21[iI][iJ];
-              vC[iI + iN/2][iJ + iN/2] = vC22[iI][iJ];
+              vC[iI][iJ + iN] = vC12[iI][iJ];
+              vC[iI + iN][iJ] = vC21[iI][iJ];
+              vC[iI + iN][iJ + iN] = vC22[iI][iJ];
            }
         }
 
@@ -204,15 +206,15 @@ void strassenMethod(int iN, vector<vector<int>> vA,
 int main(){
     int iN;                     //The number of Rows X Columns of the matrix's
 
-    cin >> iN;
+    cin >> iN;                  //Read the number
 
     vector<vector<int>> vA(iN, vector<int>(iN));
     vector<vector<int>> vB(iN, vector<int>(iN));    //The matrix that will be multiplied
-    vector<vector<int>> vT(iN, vector<int>(iN));    //The resultant matrix
-    vector<vector<int>> vS(iN, vector<int>(iN));
+    vector<vector<int>> vT(iN, vector<int>(iN));    //The resultant matrix with the traditional method
+    vector<vector<int>> vS(iN, vector<int>(iN));    //The resultant matrix with the Strassen method
 
     fillMatrix(vA);
-    fillMatrix(vB);                         //Read the values of each matrix
+    fillMatrix(vB);                         //Fill the matrices
 
     cout << "Traditional:" << endl;
     traditionalMethod(iN, vA, vB, vT);      //Call the traditional method
@@ -221,13 +223,9 @@ int main(){
     cout << endl;
 
     cout << "Strassen:" << endl;
-    strassenMethod(iN, vA, vB, vS);
-    printMatrix(iN, vS);
+    strassenMethod(iN, vA, vB, vS);         //Call the Strassen Method
+    printMatrix(iN, vS);                    //Print the resultant matrix
     cout << "Scalar Multiplications: " << floor(pow(iN, 2.81)) + 7 << endl;
-    cout << endl;
-
-
-
 
     return 0;
 }
