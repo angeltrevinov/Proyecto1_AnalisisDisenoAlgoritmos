@@ -1,7 +1,7 @@
 /*
   Noe Amador Campos Castillo    A00820323
   Angel Odiel Treviño Villanueva A01336559
-  Proyecto: 1A  Fecha: 5/Marzo  Materia: Analisis y Diseños de Algoritmos
+  Proyecto: 1B Fecha: 5/Marzo/2018  Materia: Analisis y Diseños de Algoritmos
 */
 
 #include <iostream>
