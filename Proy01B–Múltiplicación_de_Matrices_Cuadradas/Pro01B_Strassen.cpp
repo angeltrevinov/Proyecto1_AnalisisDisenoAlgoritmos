@@ -52,7 +52,7 @@ void notBase2(int iN, vector<vector<int>> vV){
 
     cout << "Over " << endl;
     for(int iI = 0; iI < iN; iI++){
-        for(int iJ = iN; iJ <= pow(2, iBase); iI++){
+        for(int iJ = iN; iJ <= pow(2, iBase); iJ++){
             cout << "inside2 " << endl;
             vV[iI].push_back(0);
         }
