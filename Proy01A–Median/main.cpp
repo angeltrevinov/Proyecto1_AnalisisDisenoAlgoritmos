@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <climits>
+#include <vector>
 
 using namespace std;
 
@@ -48,7 +49,7 @@ double Median (int iArr1[], int iArr2[], int iN, int iBottom1, int iTop1,
 }
 
 int main(){
-
+  vector <double> vRespuestas;
   int iCases; // number of cases
   cin >> iCases;
   int iN; // the size of each iArray
@@ -66,12 +67,19 @@ int main(){
     for(int iI = 0; iI < iN; iI++){
       cin >> iiArr2[iI];
     }
-
     //sends both arrays with their sizes and bottoms and tops to start the recursive function
-    cout << "iMidian Case "<<iCont<<": "<< Median(iiArr1, iiArr2, iN, 0 ,
-      iN-1, 0, iN-1) << endl;
+    vRespuestas.push_back(Median(iiArr1, iiArr2, iN, 0 ,
+      iN-1, 0, iN-1));
 
     iCont++;
   }
+
+  //print answers
+  for(int i = 0; i < iCases; i++){
+    cout << "Median Case "<<i+1<<": ";
+    cout << fixed;
+    cout <<vRespuestas[i] <<endl;
+  }
+
   return 0;
 }
