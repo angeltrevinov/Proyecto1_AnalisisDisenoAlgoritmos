@@ -45,6 +45,28 @@ void traditionalMethod(int iN, vector<vector<int>> vA, vector<vector<int>> vB,
     }
 }
 
+void notBase2(int iN, vector<vector<int>> vV){
+    cout << "Not" << endl;
+    int iBase = ceil(log2(iN));
+    cout << "Pow" << pow(2, iBase) << endl;
+
+    cout << "Over " << endl;
+    for(int iI = 0; iI < iN; iI++){
+        for(int iJ = iN; iJ <= pow(2, iBase); iI++){
+            cout << "inside2 " << endl;
+            vV[iI].push_back(0);
+        }
+    }
+
+    cout << "Here" << endl;
+    for(int iC = iN; iC <= pow(2, iBase); iC++){
+        cout << "Inside" << endl;
+        vV.push_back(vector<int>(pow(2, iBase)));
+    }
+
+    cout << "Pass" << endl;
+}
+
 //Add the two matrices received in the desired range
 void addMatrix(int iN, vector<vector<int>> vA, vector<vector<int>> vB,
     vector<vector<int>> &vQ){
@@ -223,6 +245,15 @@ int main(){
     cout << endl;
 
     cout << "Strassen:" << endl;
+
+    //Check if iN is not Base 2, and in that case call the function to make it
+    if(fmod(log2(iN), 1) != 0.0){
+        cout << "Here" << endl;
+        notBase2(iN, vA);
+        notBase2(iN, vB);
+
+        iN = pow(2, ceil(log2(iN)));
+    }
     strassenMethod(iN, vA, vB, vS);         //Call the Strassen Method
     printMatrix(iN, vS);                    //Print the resultant matrix
     cout << "Scalar Multiplications: " << floor(pow(iN, 2.81)) + 7 << endl;
