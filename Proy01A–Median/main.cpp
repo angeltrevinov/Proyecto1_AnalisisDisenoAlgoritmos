@@ -19,8 +19,8 @@ void fillArray(int iN, int iArr[]){
     }
 }
 
-//Funtion to get the median of an specific range
-double getMedian(int iArr[],int iBottom,int iTop){
+//Funtion to get the middle of the array
+double getMiddle(int iArr[],int iBottom,int iTop){
   /*Get the length of the separation, the difference between the
   beggining and the end*/
   int iLen = iTop - iBottom+1;
@@ -46,10 +46,10 @@ double Median (int iArr1[], int iArr2[], int iN, int iBottom1, int iTop1,
                 min(iArr1[iTop1], iArr2[iTop2]))/2;
       }
 
-      // Get in the median of the first array
-      double iMid1 = getMedian(iArr1,iBottom1,iTop1);
-      // Get the median of the second array
-      double iMid2 = getMedian(iArr2,iBottom1,iTop2);
+      // Get in the middle of the first array
+      double iMid1 = getMiddle(iArr1,iBottom1,iTop1);
+      // Get in the middle of the second array
+      double iMid2 = getMiddle(iArr2,iBottom1,iTop2);
 
       // You are too far from the left
       if(iMid1 <= iMid2){
